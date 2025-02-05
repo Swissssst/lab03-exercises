@@ -1,22 +1,22 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class FindDuplicates {
 
     public static List<Integer> findDuplicatesNestedLoops(List<Integer> l) {
-        Set<Integer> seen = new HashSet<>();
-        Set<Integer> duplicates = new HashSet<>();
+        List<Integer> duplicates = new ArrayList<>();
 
-        for (Integer num : l) {
-            if (!seen.add(num)) {
-                duplicates.add(num);
+        for (int i = 0; i < l.size(); i++) {
+            for (int j = i + 1; j < l.size(); j++) {
+                if (l.get(i).equals(l.get(j)) && !duplicates.contains(l.get(i))) {
+                    duplicates.add(l.get(i));
+                    break;
+                }
             }
         }
 
-        return new ArrayList<>(duplicates);
+        return duplicates;
     }
 
     public static void main(String[] args) {
